@@ -49,7 +49,7 @@ body, html {
   position: absolute;
   width: 120px;
   height: 60px;
-  transition: all 3s ease;
+  transition: all 1s ease; /* smoother motion */
   filter: drop-shadow(0 0 10px white);
   animation: bob 4s infinite ease-in-out;
 }
@@ -265,7 +265,7 @@ body, html {
 
 /* Cursor Escape Effect (visual feedback) */
 .fish.escape {
-  transition: transform 0.5s ease;
+  transition: top 1s ease, left 1s ease;
   filter: drop-shadow(0 0 15px yellow);
 }
 
