@@ -15,6 +15,14 @@ const sharkContainer = document.getElementById('sharkContainer');
 const waterSound = document.getElementById("waterSound");
 waterSound.volume = 0.4; // softer background volume
 
+// Play/Pause buttons
+document.getElementById("playBtn").addEventListener("click", () => {
+  waterSound.play();
+});
+document.getElementById("pauseBtn").addEventListener("click", () => {
+  waterSound.pause();
+});
+
 // Plants with bubbles
 for (let i = 0; i < 12; i++) {
   const plant = document.createElement('div');
@@ -150,16 +158,16 @@ function createShark() {
   shark.style.left = "-250px"; // start off-screen
   sharkContainer.appendChild(shark);
 
-  // Swim across
+  // Swim across slowly
   setTimeout(() => {
-    shark.style.transition = "left 1s linear";
+    shark.style.transition = "left 20s linear";
     shark.style.left = "120vw";
   }, 50);
 
-  // Remove after 1 second
+  // Remove after 22 seconds
   setTimeout(() => {
     shark.remove();
-  }, 1000);
+  }, 22000);
 }
 
 // Appear every 2 minutes
@@ -196,4 +204,27 @@ document.getElementById("schoolBtn").addEventListener("click", () => {
     fish.style.top = "50vh";
     fish.style.left = `${40 + Math.random() * 20}vw`;
   });
+});
+
+// Day/Night Toggle
+const toggleBtn = document.getElementById("toggleThemeBtn");
+const waterTank = document.getElementById("waterTank");
+let isNight = true; // default night mode
+
+toggleBtn.addEventListener("click", () => {
+  if (isNight) {
+    // Switch to Day Mode
+    waterTank.style.background = "linear-gradient(to bottom, #0099ff, #003366)";
+    document.querySelectorAll(".fish .body").forEach(f => f.style.boxShadow = "none");
+    document.querySelectorAll(".plant").forEach(p => p.style.boxShadow = "none");
+    document.querySelectorAll(".jellyfish").forEach(j => j.style.boxShadow = "0 0 20px rgba(173,216,230,0.9)");
+    isNight = false;
+  } else {
+    // Switch back to Night Mode
+    waterTank.style.background = "linear-gradient(to bottom, #001a33, #000000)";
+    document.querySelectorAll(".fish .body").forEach(f => f.style.boxShadow = "0 0 25px rgba(255,255,255,1)");
+    document.querySelectorAll(".plant").forEach(p => p.style.boxShadow = "0 0 15px rgba(0,255,150,0.7)");
+    document.querySelectorAll(".jellyfish").forEach(j => j.style.boxShadow = "0 0 40px rgba(0,200,255,1), 0 0 80px rgba(0,200,255,0.7)");
+    isNight = true;
+  }
 });
