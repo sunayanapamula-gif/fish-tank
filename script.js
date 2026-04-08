@@ -3,6 +3,8 @@ const houseContainer = document.getElementById('houseContainer');
 const fishContainer = document.getElementById('fishContainer');
 const bubbleContainer = document.getElementById('bubbleContainer');
 const tortoiseContainer = document.getElementById('tortoiseContainer');
+const coralContainer = document.getElementById('coralContainer');
+const jellyfishContainer = document.getElementById('jellyfishContainer');
 
 // Add plants with bubbles
 for (let i = 0; i < 12; i++) {
@@ -15,27 +17,31 @@ for (let i = 0; i < 12; i++) {
     const bubble = document.createElement('div');
     bubble.className = 'bubble';
 
-    // Random size
     const size = 5 + Math.random() * 15;
     bubble.style.width = `${size}px`;
     bubble.style.height = `${size}px`;
 
-    // Random horizontal position near plant
     bubble.style.left = `${i * 8 + Math.random() * 5}vw`;
     bubble.style.bottom = "80px";
 
-    // Random speed
-    const duration = 6 + Math.random() * 6; // 6–12s
+    const duration = 6 + Math.random() * 6;
     bubble.style.animationDuration = `${duration}s`;
     bubble.style.setProperty('--duration', `${duration}s`);
 
-    // Random horizontal drift
     const drift = Math.random() < 0.5 ? -1 : 1;
     bubble.style.setProperty('--drift', drift * (5 + Math.random() * 15) + 'px');
 
     bubbleContainer.appendChild(bubble);
     setTimeout(() => bubble.remove(), duration * 1000);
   }, 3000);
+}
+
+// Add coral reefs
+for (let i = 0; i < 6; i++) {
+  const coral = document.createElement('div');
+  coral.className = 'coral';
+  coral.style.left = `${i * 15}vw`;
+  coralContainer.appendChild(coral);
 }
 
 // Add den/house
@@ -64,14 +70,12 @@ function createFish(type, bigTail=false, small=false) {
 
   fishContainer.appendChild(fish);
 
-  // Random swimming with pauses
   setInterval(() => {
-    if (Math.random() < 0.3) return; // pause sometimes
+    if (Math.random() < 0.3) return;
     fish.style.top = `${Math.random() * 70}vh`;
     fish.style.left = `${Math.random() * 90}vw`;
   }, 6000);
 
-  // Hide beside plants or den when cursor near
   fish.addEventListener('mouseenter', () => {
     const hideOption = Math.random();
     if (hideOption < 0.5) {
@@ -97,81 +101,65 @@ createFish('orange', false, true);
 createFish('rainbow', false, true);
 
 // Create big tortoise
-const tortoise = document.createElement('div');
-tortoise.className = 'tortoise';
+function createTortoise(small=false) {
+  const tortoise = document.createElement('div');
+  tortoise.className = `tortoise ${small ? 'small' : ''}`;
 
-const shell = document.createElement('div');
-shell.className = 'shell';
+  const shell = document.createElement('div');
+  shell.className = 'shell';
 
-const head = document.createElement('div');
-head.className = 'head';
-const eye = document.createElement('div');
-eye.className = 'eye';
-head.appendChild(eye);
+  const head = document.createElement('div');
+  head.className = 'head';
+  const eye = document.createElement('div');
+  eye.className = 'eye';
+  head.appendChild(eye);
 
-const legFL = document.createElement('div');
-legFL.className = 'leg front-left';
-const legFR = document.createElement('div');
-legFR.className = 'leg front-right';
-const legBL = document.createElement('div');
-legBL.className = 'leg back-left';
-const legBR = document.createElement('div');
-legBR.className = 'leg back-right';
+  const legFL = document.createElement('div');
+  legFL.className = 'leg front-left';
+  const legFR = document.createElement('div');
+  legFR.className = 'leg front-right';
+  const legBL = document.createElement('div');
+  legBL.className = 'leg back-left';
+  const legBR = document.createElement('div');
+  legBR.className = 'leg back-right';
 
-tortoise.appendChild(shell);
-tortoise.appendChild(head);
-tortoise.appendChild(legFL);
-tortoise.appendChild(legFR);
-tortoise.appendChild(legBL);
-tortoise.appendChild(legBR);
+  tortoise.appendChild(shell);
+  tortoise.appendChild(head);
+  tortoise.appendChild(legFL);
+  tortoise.appendChild(legFR);
+  tortoise.appendChild(legBL);
+  tortoise.appendChild(legBR);
 
-tortoise.style.top = `${Math.random() * 70}vh`;
-tortoise.style.left = `${Math.random() * 90}vw`;
-
-tortoiseContainer.appendChild(tortoise);
-
-// Random slow swimming for big tortoise
-setInterval(() => {
   tortoise.style.top = `${Math.random() * 70}vh`;
   tortoise.style.left = `${Math.random() * 90}vw`;
-}, 8000);
 
-// Create small tortoise
-const smallTortoise = document.createElement('div');
-smallTortoise.className = 'tortoise small';
+  tortoiseContainer.appendChild(tortoise);
 
-const shellSmall = document.createElement('div');
-shellSmall.className = 'shell';
+  setInterval(() => {
+    tortoise.style.top = `${Math.random() * 70}vh`;
+    tortoise.style.left = `${Math.random() * 90}vw`;
+  }, small ? 10000 : 8000);
+}
 
-const headSmall = document.createElement('div');
-headSmall.className = 'head';
-const eyeSmall = document.createElement('div');
-eyeSmall.className = 'eye';
-headSmall.appendChild(eyeSmall);
+// Add tortoise family
+createTortoise(false); // big
+createTortoise(true);  // small
 
-const legSFL = document.createElement('div');
-legSFL.className = 'leg front-left';
-const legSFR = document.createElement('div');
-legSFR.className = 'leg front-right';
-const legSBL = document.createElement('div');
-legSBL.className = 'leg back-left';
-const legSBR = document.createElement('div');
-legSBR.className = 'leg back-right';
+// Add jellyfish
+function createJellyfish() {
+  const jelly = document.createElement('div');
+  jelly.className = 'jellyfish';
+  jelly.style.top = `${Math.random() * 60}vh`;
+  jelly.style.left = `${Math.random() * 90}vw`;
+  jellyfishContainer.appendChild(jelly);
 
-smallTortoise.appendChild(shellSmall);
-smallTortoise.appendChild(headSmall);
-smallTortoise.appendChild(legSFL);
-smallTortoise.appendChild(legSFR);
-smallTortoise.appendChild(legSBL);
-smallTortoise.appendChild(legSBR);
+  setInterval(() => {
+    jelly.style.top = `${Math.random() * 60}vh`;
+    jelly.style.left = `${Math.random() * 90}vw`;
+  }, 12000);
+}
 
-smallTortoise.style.top = `${Math.random() * 70}vh`;
-smallTortoise.style.left = `${Math.random() * 90}vw`;
-
-tortoiseContainer.appendChild(smallTortoise);
-
-// Random slow swimming for small tortoise
-setInterval(() => {
-  smallTortoise.style.top = `${Math.random() * 70}vh`;
-  smallTortoise.style.left = `${Math.random() * 90}vw`;
-}, 10000);
+// Create a few jellyfish
+for (let i = 0; i < 3; i++) {
+  createJellyfish();
+}
