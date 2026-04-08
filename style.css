@@ -1,229 +1,331 @@
-// Containers
-const plantsContainer = document.getElementById('plantsContainer');
-const houseContainer = document.getElementById('houseContainer');
-const fishContainer = document.getElementById('fishContainer');
-const bubbleContainer = document.getElementById('bubbleContainer');
-const tortoiseContainer = document.getElementById('tortoiseContainer');
-const coralContainer = document.getElementById('coralContainer');
-const jellyfishContainer = document.getElementById('jellyfishContainer');
-const starfishContainer = document.getElementById('starfishContainer');
-const crabContainer = document.getElementById('crabContainer');
-const neonFishContainer = document.getElementById('neonFishContainer');
-const sharkContainer = document.getElementById('sharkContainer');
-
-// Water sound control
-const waterSound = document.getElementById("waterSound");
-waterSound.volume = 0.4;
-
-// Play/Pause buttons
-document.getElementById("playBtn").addEventListener("click", () => {
-  waterSound.play();
-});
-document.getElementById("pauseBtn").addEventListener("click", () => {
-  waterSound.pause();
-});
-
-// Plants with bubbles
-for (let i = 0; i < 12; i++) {
-  const plant = document.createElement('div');
-  plant.className = 'plant';
-  plant.style.left = `${i * 8}vw`;
-  plantsContainer.appendChild(plant);
-
-  setInterval(() => {
-    const bubble = document.createElement('div');
-    bubble.className = 'bubble';
-    const size = 5 + Math.random() * 15;
-    bubble.style.width = `${size}px`;
-    bubble.style.height = `${size}px`;
-    bubble.style.left = `${i * 8 + Math.random() * 5}vw`;
-    bubble.style.bottom = "80px";
-    const duration = 6 + Math.random() * 6;
-    bubble.style.animationDuration = `${duration}s`;
-    bubble.style.setProperty('--duration', `${duration}s`);
-    const drift = Math.random() < 0.5 ? -1 : 1;
-    bubble.style.setProperty('--drift', drift * (5 + Math.random() * 15) + 'px');
-    bubbleContainer.appendChild(bubble);
-    setTimeout(() => bubble.remove(), duration * 1000);
-  }, 3000);
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
 }
 
-// Coral reefs
-for (let i = 0; i < 6; i++) {
-  const coral = document.createElement('div');
-  coral.className = 'coral';
-  coral.style.left = `${i * 15}vw`;
-  coralContainer.appendChild(coral);
+/* Water Tank - Dark Mode Ocean */
+#waterTank {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(to bottom, #001a33, #000000); /* night ocean */
+  animation: waveMotion 20s infinite linear;
+  overflow: hidden;
 }
 
-// House/Den
-const house = document.createElement('div');
-house.className = 'house';
-houseContainer.appendChild(house);
-
-// Fish creation
-function createFish(type, bigTail=false, small=false) {
-  const fish = document.createElement('div');
-  fish.className = `fish ${type} ${bigTail ? 'bigTail' : ''} ${small ? 'small' : ''}`;
-  const body = document.createElement('div'); body.className = 'body';
-  const tail = document.createElement('div'); tail.className = 'tail';
-  const eye = document.createElement('div'); eye.className = 'eye';
-  fish.appendChild(body); fish.appendChild(tail); fish.appendChild(eye);
-
-  fish.style.top = `${Math.random() * 70}vh`;
-  fish.style.left = `${Math.random() * 90}vw`;
-  fishContainer.appendChild(fish);
-
-  fish.addEventListener('mouseenter', () => {
-    fish.classList.add('escape');
-    const newTop = `${Math.random() * 70}vh`;
-    const newLeft = `${Math.random() * 90}vw`;
-    fish.style.transition = "top 1s ease, left 1s ease";
-    fish.style.top = newTop;
-    fish.style.left = newLeft;
-    setTimeout(() => fish.classList.remove('escape'), 1000);
-  });
-
-  setInterval(() => {
-    const newTop = `${Math.random() * 70}vh`;
-    const newLeft = `${Math.random() * 90}vw`;
-    fish.style.transition = "top 8s ease, left 8s ease";
-    fish.style.top = newTop;
-    fish.style.left = newLeft;
-  }, 8000);
+@keyframes waveMotion {
+  0% { background-position: 0 0; }
+  100% { background-position: 100vw 0; }
 }
 
-// Fishes
-createFish('rainbow', true);
-createFish('orange');
-createFish('blue', true);
-createFish('rainbow');
-createFish('orange', true);
-createFish('blue', false, true);
-createFish('orange', false, true);
-createFish('rainbow', false, true);
-
-// Tortoise
-function createTortoise(small=false) {
-  const tortoise = document.createElement('div');
-  tortoise.className = `tortoise ${small ? 'small' : ''}`;
-  const shell = document.createElement('div'); shell.className = 'shell';
-  const head = document.createElement('div'); head.className = 'head';
-  const eye = document.createElement('div'); eye.className = 'eye'; head.appendChild(eye);
-  const legFL = document.createElement('div'); legFL.className = 'leg front-left';
-  const legFR = document.createElement('div'); legFR.className = 'leg front-right';
-  const legBL = document.createElement('div'); legBL.className = 'leg back-left';
-  const legBR = document.createElement('div'); legBR.className = 'leg back-right';
-  tortoise.appendChild(shell); tortoise.appendChild(head);
-  tortoise.appendChild(legFL); tortoise.appendChild(legFR);
-  tortoise.appendChild(legBL); tortoise.appendChild(legBR);
-  tortoise.style.top = `${Math.random() * 70}vh`;
-  tortoise.style.left = `${Math.random() * 90}vw`;
-  tortoiseContainer.appendChild(tortoise);
-
-  setInterval(() => {
-    const newTop = `${Math.random() * 70}vh`;
-    const newLeft = `${Math.random() * 90}vw`;
-    tortoise.style.transition = "top 10s ease, left 10s ease";
-    tortoise.style.top = newTop;
-    tortoise.style.left = newLeft;
-  }, 10000);
+/* Control Buttons */
+.controls {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 1000;
 }
-createTortoise(false);
-createTortoise(true);
-
-// Jellyfish
-function createJellyfish() {
-  const jelly = document.createElement('div');
-  jelly.className = 'jellyfish';
-  jelly.style.top = `${Math.random() * 60}vh`;
-  jelly.style.left = `${Math.random() * 90}vw`;
-  jellyfishContainer.appendChild(jelly);
+.controls button {
+  margin: 5px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  background: #0066cc;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s;
 }
-for (let i = 0; i < 3; i++) createJellyfish();
-
-// Starfish, Crab, Neon Fish
-const starfish = document.createElement('div'); starfish.className = 'starfish'; starfishContainer.appendChild(starfish);
-const crab = document.createElement('div'); crab.className = 'crab'; crabContainer.appendChild(crab);
-const neonFish = document.createElement('div'); neonFish.className = 'neon-fish'; neonFishContainer.appendChild(neonFish);
-
-// Shark
-function createShark() {
-  const shark = document.createElement('div');
-  shark.className = 'shark';
-  shark.style.top = `${Math.random() * 60}vh`;
-  shark.style.left = "-250px"; // start off-screen
-  sharkContainer.appendChild(shark);
-
-  // Swim across slowly
-  setTimeout(() => {
-    shark.style.transition = "left 20s linear";
-    shark.style.left = "120vw";
-  }, 50);
-
-  // Remove after 22 seconds
-  setTimeout(() => {
-    shark.remove();
-  }, 22000);
+.controls button:hover {
+  background: #004c99;
 }
 
-// Appear every 2 minutes
-setInterval(createShark, 120000);
+/* Fish */
+.fish {
+  position: absolute;
+  width: 120px;
+  height: 60px;
+  transition: all 1s ease;
+  filter: drop-shadow(0 0 15px rgba(0,255,255,0.8)); /* glowing aura */
+  animation: bob 4s infinite ease-in-out, swim 12s infinite linear;
+}
+.fish.small { width: 60px; height: 30px; }
 
-// --- Buttons ---
-document.getElementById("resetBtn").addEventListener("click", () => {
-  fishContainer.innerHTML = "";
-  tortoiseContainer.innerHTML = "";
-  jellyfishContainer.innerHTML = "";
-  starfishContainer.innerHTML = "";
-  crabContainer.innerHTML = "";
-  neonFishContainer.innerHTML = "";
-  sharkContainer.innerHTML = "";
+.fish .body {
+  width: 80%;
+  height: 60%;
+  border-radius: 50%;
+  position: absolute;
+  top: 20%;
+  left: 20%;
+}
+.fish.small .body { width: 40px; height: 20px; }
 
-  // Recreate creatures
-  createFish('rainbow', true);
-  createFish('orange');
-  createFish('blue', true);
-  createFish('rainbow');
-  createFish('orange', true);
-  createFish('blue', false, true);
-  createFish('orange', false, true);
-  createFish('rainbow', false, true);
-  createTortoise(false);
-  createTortoise(true);
-  for (let i = 0; i < 3; i++) createJellyfish();
-  starfishContainer.appendChild(starfish);
-  crabContainer.appendChild(crab);
-  neonFishContainer.appendChild(neonFish);
-});
+.fish .tail {
+  width: 40px;
+  height: 40px;
+  clip-path: polygon(0 50%, 100% 0, 100% 100%);
+  position: absolute;
+  left: 0;
+  top: 10px;
+  transform-origin: right center;
+  animation: flap 1s infinite alternate ease-in-out;
+}
+.fish.small .tail { width: 20px; height: 20px; }
 
-document.getElementById("schoolBtn").addEventListener("click", () => {
-  const fishes = document.querySelectorAll(".fish");
-  fishes.forEach(fish => {
-    fish.style.top = "50vh";
-    fish.style.left = `${40 + Math.random() * 20}vw`;
-  });
-});
+.fish .eye {
+  width: 8px;
+  height: 8px;
+  background: black;
+  border-radius: 50%;
+  position: absolute;
+  top: 20px;
+  left: 70%;
+}
+.fish.small .eye { width: 4px; height: 4px; top: 8px; left: 30px; }
 
-// Day/Night Toggle
-const toggleBtn = document.getElementById("toggleThemeBtn");
-const waterTank = document.getElementById("waterTank");
-let isNight = true; // default night mode
+/* Fish colors + glow */
+.rainbow .body {
+  background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+  box-shadow: 0 0 25px rgba(255,255,255,1);
+}
+.rainbow .tail {
+  background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+}
+.orange .body { background: orange; box-shadow: 0 0 20px rgba(255,165,0,1); }
+.orange .tail { background: orange; }
+.blue .body { background: dodgerblue; box-shadow: 0 0 20px rgba(30,144,255,1); }
+.blue .tail { background: dodgerblue; }
+.bigTail .tail { width: 60px; height: 60px; }
 
-toggleBtn.addEventListener("click", () => {
-  if (isNight) {
-    // Switch to Day Mode
-    waterTank.style.background = "linear-gradient(to bottom, #0099ff, #003366)";
-    document.querySelectorAll(".fish .body").forEach(f => f.style.boxShadow = "none");
-    document.querySelectorAll(".plant").forEach(p => p.style.boxShadow = "none");
-    document.querySelectorAll(".jellyfish").forEach(j => j.style.boxShadow = "0 0 20px rgba(173,216,230,0.9)");
-    isNight = false;
-  } else {
-    // Switch back to Night Mode
-    waterTank.style.background = "linear-gradient(to bottom, #001a33, #000000)";
-    document.querySelectorAll(".fish .body").forEach(f => f.style.boxShadow = "0 0 25px rgba(255,255,255,1)");
-    document.querySelectorAll(".plant").forEach(p => p.style.boxShadow = "0 0 15px rgba(0,255,150,0.7)");
-    document.querySelectorAll(".jellyfish").forEach(j => j.style.boxShadow = "0 0 40px rgba(0,200,255,1), 0 0 80px rgba(0,200,255,0.7)");
-    isNight = true;
-  }
-});
+/* Animations */
+@keyframes flap { 0% { transform: rotate(0deg); } 100% { transform: rotate(25deg); } }
+@keyframes bob { 0% { transform: translateY(0); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0); } }
+@keyframes swim {
+  0%   { transform: translateX(0); }
+  50%  { transform: translateX(200px) translateY(-20px); }
+  100% { transform: translateX(0); }
+}
+
+/* Plants - glowing bioluminescence */
+.plant {
+  position: absolute;
+  bottom: 0;
+  width: 25px;
+  height: 100px;
+  background: linear-gradient(to top, #003300, #00ff99);
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0,255,150,0.7);
+}
+
+/* Coral decorations */
+.coral {
+  position: absolute;
+  bottom: 0;
+  width: 40px;
+  height: 60px;
+  background: coral;
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(255,127,80,0.8);
+}
+
+/* House/Den */
+.house {
+  position: absolute;
+  bottom: 0;
+  left: 40vw;
+  width: 150px;
+  height: 120px;
+  background: sienna;
+  border-radius: 20px 20px 0 0;
+}
+
+/* Bubbles */
+.bubble {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.7);
+  animation: rise var(--duration, 8s) linear forwards;
+}
+@keyframes rise {
+  0%   { transform: translate(0,0); opacity: 1; }
+  25%  { transform: translate(var(--drift), -25vh); }
+  50%  { transform: translate(calc(var(--drift) * -1), -50vh); }
+  75%  { transform: translate(var(--drift), -75vh); }
+  100% { transform: translate(0, -100vh); opacity: 0; }
+}
+
+/* Tortoise */
+.tortoise {
+  position: absolute;
+  width: 120px;
+  height: 80px;
+  transition: all 5s ease;
+  animation: bob 6s infinite ease-in-out;
+}
+.tortoise.small { width: 80px; height: 50px; }
+
+.tortoise .shell {
+  width: 100px;
+  height: 70px;
+  background: radial-gradient(circle, darkgreen, green);
+  border-radius: 50%;
+  position: absolute;
+  top: 5px;
+  left: 10px;
+}
+.tortoise.small .shell { width: 70px; height: 40px; }
+
+.tortoise .head {
+  width: 25px;
+  height: 25px;
+  background: green;
+  border-radius: 50%;
+  position: absolute;
+  top: 25px;
+  left: -15px;
+}
+.tortoise.small .head { width: 15px; height: 15px; top: 15px; left: -10px; }
+
+.tortoise .eye {
+  width: 6px;
+  height: 6px;
+  background: black;
+  border-radius: 50%;
+  position: absolute;
+  top: 8px;
+  left: 5px;
+}
+
+.tortoise .leg {
+  width: 20px;
+  height: 20px;
+  background: green;
+  border-radius: 50%;
+  position: absolute;
+  animation: paddle 1s infinite alternate ease-in-out;
+}
+.tortoise.small .leg { width: 12px; height: 12px; }
+.tortoise .leg.front-left { top: 10px; left: 0; }
+.tortoise .leg.front-right { top: 10px; right: 0; }
+.tortoise .leg.back-left { bottom: 10px; left: 0; }
+.tortoise .leg.back-right { bottom: 10px; right: 0; }
+
+@keyframes paddle { 0% { transform: rotate(0deg); } 100% { transform: rotate(20deg); } }
+
+/* Jellyfish - brighter glow */
+.jellyfish {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: rgba(173,216,230,0.9);
+  border-radius: 50%;
+  box-shadow: 0 0 40px rgba(0,200,255,1), 0 0 80px rgba(0,200,255,0.7);
+  animation: float 10s ease-in-out infinite;
+}
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-50px); }
+  100% { transform: translateY(0); }
+}
+
+/* Starfish */
+.starfish {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background: orange;
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  box-shadow: 0 0 10px rgba(255,165,0,0.8);
+}
+
+/* Crab */
+.crab {
+  position: absolute;
+  width: 60px;
+  height: 30px;
+  background: red;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(255,0,0,0.7);
+}
+
+/* Neon Fish */
+.neon-fish {
+  position: absolute;
+  width: 80px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(90deg, cyan, magenta, lime);
+  box-shadow: 0 0 20px rgba(0,255,255,0.9), 0 0 40px rgba(255,0,255,0.7);
+  animation: swimNeon 6s infinite ease-in-out;
+}
+@keyframes swimNeon {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(200px) translateY(-30px); }
+  100% { transform: translateX(0); }
+}
+
+/* Cursor Escape Effect (visual feedback) */
+.fish.escape {
+  transition: top 1s ease, left 1s ease;
+  filter: drop-shadow(0 0 15px yellow);
+}
+
+/* Positioning for new creatures */
+#starfishContainer .starfish {
+  bottom: 10%;
+  left: 20%;
+}
+#crabContainer .crab {
+  bottom: 5%;
+  right: 15%;
+}
+#neonFishContainer .neon-fish {
+  top: 30%;
+  left: 50%;
+}
+
+/* Shark */
+.shark {
+  position: absolute;
+  width: 200px;
+  height: 100px;
+  background: gray;
+  border-radius: 50% 50% 40% 40%;
+  box-shadow: 0 0 20px rgba(0,0,0,0.7);
+}
+
+/* Tail */
+.shark::after {
+  content: '';
+  position: absolute;
+  right: -40px;
+  top: 30px;
+  width: 60px;
+  height: 40px;
+  background: gray;
+  clip-path: polygon(0 50%, 100% 0, 100% 100%);
+}
+
+/* Fin */
+.shark::before {
+  content: '';
+  position: absolute;
+  top: -30px;
+  left: 60px;
+  width: 40px;
+  height: 40px;
+  background: gray;
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  animation: finMove 1s infinite alternate ease-in-out;
+}
+
+/* Fin animation */
+@keyframes finMove {
+  0% { transform: rotate(0deg) translateY(0); }
+  100% { transform: rotate(10deg) translateY(-5px); }
+}
