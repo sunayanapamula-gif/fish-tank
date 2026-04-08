@@ -10,8 +10,9 @@
   <div class="controls">
     <button id="resetBtn">Reset</button>
     <button id="schoolBtn">Schooling Mode</button>
-    <button onclick="document.getElementById('waterSound').play()">Play Water Sound</button>
-    <button onclick="document.getElementById('waterSound').pause()">Pause Water Sound</button>
+    <button id="playBtn">Play Water Sound</button>
+    <button id="pauseBtn">Pause Water Sound</button>
+    <button id="toggleThemeBtn">Toggle Day/Night</button>
   </div>
 
   <!-- Aquarium Container -->
@@ -26,13 +27,12 @@
     <div id="starfishContainer"></div>
     <div id="crabContainer"></div>
     <div id="neonFishContainer"></div>
-    <div id="sharkContainer"></div> <!-- NEW shark container -->
+    <div id="sharkContainer"></div>
   </div>
 
   <!-- Continuous Water Sound -->
-  <audio id="waterSound" autoplay loop>
-    <source src="549334__kapilkant__soft-ocean-waves-sounds.m4a" type="audio/mp4">
-    <!-- Fallback text for unsupported browsers -->
+  <audio id="waterSound" loop>
+    <source src="549334__kapilkant__soft-ocean-waves-sounds.m4a" type="audio/m4a">
     Your browser does not support the audio element.
   </audio>
 
