@@ -1,4 +1,6 @@
 // Containers
+const waterSound = document.getElementById("waterSound");
+waterSound.volume = 0.4; // adjust between 0.0 (mute) and 1.0 (full volume)
 const plantsContainer = document.getElementById('plantsContainer');
 const houseContainer = document.getElementById('houseContainer');
 const fishContainer = document.getElementById('fishContainer');
