@@ -6,6 +6,14 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <!-- Control Buttons -->
+  <div class="controls">
+    <button id="resetBtn">Reset</button>
+    <button id="orbitBtn">Orbit Mode</button>
+    <button id="schoolBtn">Schooling Mode</button>
+  </div>
+
+  <!-- Aquarium Container -->
   <div id="waterTank">
     <div id="plantsContainer"></div>
     <div id="coralContainer"></div>
@@ -14,7 +22,16 @@
     <div id="bubbleContainer"></div>
     <div id="jellyfishContainer"></div>
     <div id="tortoiseContainer"></div>
+    <div id="starfishContainer"></div>
+    <div id="crabContainer"></div>
+    <div id="neonFishContainer"></div>
   </div>
+
+  <!-- Background Music -->
+  <audio id="bgMusic" autoplay loop>
+    <source src="ocean-waves.mp3" type="audio/mpeg">
+  </audio>
+
   <script src="script.js"></script>
 </body>
 </html>
