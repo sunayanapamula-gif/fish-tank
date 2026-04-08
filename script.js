@@ -150,16 +150,16 @@ function createShark() {
   shark.style.left = "-250px"; // start off-screen
   sharkContainer.appendChild(shark);
 
-  // Swim across
+  // Swim across slowly
   setTimeout(() => {
-    shark.style.transition = "left 1s linear";
+    shark.style.transition = "left 20s linear"; // <-- changed from 1s to 20s
     shark.style.left = "120vw";
   }, 50);
 
-  // Remove after 1 second
+  // Remove after 22 seconds
   setTimeout(() => {
     shark.remove();
-  }, 1000);
+  }, 22000); // <-- changed from 1000 to 22000
 }
 
 // Appear every 2 minutes
