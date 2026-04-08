@@ -31,6 +31,7 @@ body, html {
   animation: bob 4s infinite ease-in-out;
 }
 .fish.small { width: 60px; height: 30px; }
+
 .fish .body {
   width: 80%;
   height: 60%;
@@ -40,6 +41,7 @@ body, html {
   left: 20%;
 }
 .fish.small .body { width: 40px; height: 20px; }
+
 .fish .tail {
   width: 40px;
   height: 40px;
@@ -51,6 +53,7 @@ body, html {
   animation: flap 1s infinite alternate ease-in-out;
 }
 .fish.small .tail { width: 20px; height: 20px; }
+
 .fish .eye {
   width: 8px;
   height: 8px;
@@ -62,12 +65,17 @@ body, html {
 }
 .fish.small .eye { width: 4px; height: 4px; top: 8px; left: 30px; }
 
-/* Fish colors */
-.rainbow .body { background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet); }
-.rainbow .tail { background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet); }
-.orange .body { background: orange; }
+/* Fish colors + glow */
+.rainbow .body {
+  background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+}
+.rainbow .tail {
+  background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+}
+.orange .body { background: orange; box-shadow: 0 0 12px rgba(255,165,0,0.7); }
 .orange .tail { background: orange; }
-.blue .body { background: dodgerblue; }
+.blue .body { background: dodgerblue; box-shadow: 0 0 12px rgba(30,144,255,0.7); }
 .blue .tail { background: dodgerblue; }
 .bigTail .tail { width: 60px; height: 60px; }
 
@@ -83,6 +91,17 @@ body, html {
   height: 100px;
   background: linear-gradient(to top, green, lightgreen);
   border-radius: 12px;
+}
+
+/* Coral decorations */
+.coral {
+  position: absolute;
+  bottom: 0;
+  width: 40px;
+  height: 60px;
+  background: coral;
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(255,127,80,0.8);
 }
 
 /* House/Den */
@@ -120,6 +139,7 @@ body, html {
   animation: bob 6s infinite ease-in-out;
 }
 .tortoise.small { width: 80px; height: 50px; }
+
 .tortoise .shell {
   width: 100px;
   height: 70px;
@@ -130,6 +150,7 @@ body, html {
   left: 10px;
 }
 .tortoise.small .shell { width: 70px; height: 40px; }
+
 .tortoise .head {
   width: 25px;
   height: 25px;
@@ -140,6 +161,7 @@ body, html {
   left: -15px;
 }
 .tortoise.small .head { width: 15px; height: 15px; top: 15px; left: -10px; }
+
 .tortoise .eye {
   width: 6px;
   height: 6px;
@@ -149,6 +171,7 @@ body, html {
   top: 8px;
   left: 5px;
 }
+
 .tortoise .leg {
   width: 20px;
   height: 20px;
@@ -164,3 +187,19 @@ body, html {
 .tortoise .leg.back-right { bottom: 10px; right: 0; }
 
 @keyframes paddle { 0% { transform: rotate(0deg); } 100% { transform: rotate(20deg); } }
+
+/* Jellyfish */
+.jellyfish {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: rgba(173,216,230,0.7);
+  border-radius: 50%;
+  box-shadow: 0 0 20px rgba(173,216,230,0.9);
+  animation: float 10s ease-in-out infinite;
+}
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-50px); }
+  100% { transform: translateY(0); }
+}
