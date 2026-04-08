@@ -85,8 +85,6 @@ function createFish(type, bigTail=false, small=false) {
   }, 6000); // every 6 seconds
 }
 
-}
-
 // Fishes
 createFish('rainbow', true);
 createFish('orange');
