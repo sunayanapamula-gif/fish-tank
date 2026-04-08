@@ -1,0 +1,166 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+#waterTank {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(to bottom, #0099ff, #003366);
+  animation: waveMotion 12s infinite linear;
+  overflow: hidden;
+}
+
+@keyframes waveMotion {
+  0% { background-position: 0 0; }
+  100% { background-position: 100vw 0; }
+}
+
+/* Fish */
+.fish {
+  position: absolute;
+  width: 120px;
+  height: 60px;
+  transition: all 3s ease;
+  filter: drop-shadow(0 0 10px white);
+  animation: bob 4s infinite ease-in-out;
+}
+.fish.small { width: 60px; height: 30px; }
+.fish .body {
+  width: 80%;
+  height: 60%;
+  border-radius: 50%;
+  position: absolute;
+  top: 20%;
+  left: 20%;
+}
+.fish.small .body { width: 40px; height: 20px; }
+.fish .tail {
+  width: 40px;
+  height: 40px;
+  clip-path: polygon(0 50%, 100% 0, 100% 100%);
+  position: absolute;
+  left: 0;
+  top: 10px;
+  transform-origin: right center;
+  animation: flap 1s infinite alternate ease-in-out;
+}
+.fish.small .tail { width: 20px; height: 20px; }
+.fish .eye {
+  width: 8px;
+  height: 8px;
+  background: black;
+  border-radius: 50%;
+  position: absolute;
+  top: 20px;
+  left: 70%;
+}
+.fish.small .eye { width: 4px; height: 4px; top: 8px; left: 30px; }
+
+/* Fish colors */
+.rainbow .body { background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet); }
+.rainbow .tail { background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet); }
+.orange .body { background: orange; }
+.orange .tail { background: orange; }
+.blue .body { background: dodgerblue; }
+.blue .tail { background: dodgerblue; }
+.bigTail .tail { width: 60px; height: 60px; }
+
+/* Animations */
+@keyframes flap { 0% { transform: rotate(0deg); } 100% { transform: rotate(25deg); } }
+@keyframes bob { 0% { transform: translateY(0); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0); } }
+
+/* Plants */
+.plant {
+  position: absolute;
+  bottom: 0;
+  width: 25px;
+  height: 100px;
+  background: linear-gradient(to top, green, lightgreen);
+  border-radius: 12px;
+}
+
+/* House/Den */
+.house {
+  position: absolute;
+  bottom: 0;
+  left: 40vw;
+  width: 150px;
+  height: 120px;
+  background: sienna;
+  border-radius: 20px 20px 0 0;
+}
+
+/* Bubbles */
+.bubble {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.7);
+  animation: rise var(--duration, 8s) linear forwards;
+}
+@keyframes rise {
+  0%   { transform: translate(0,0); opacity: 1; }
+  25%  { transform: translate(var(--drift), -25vh); }
+  50%  { transform: translate(calc(var(--drift) * -1), -50vh); }
+  75%  { transform: translate(var(--drift), -75vh); }
+  100% { transform: translate(0, -100vh); opacity: 0; }
+}
+
+/* Tortoise */
+.tortoise {
+  position: absolute;
+  width: 120px;
+  height: 80px;
+  transition: all 5s ease;
+  animation: bob 6s infinite ease-in-out;
+}
+.tortoise.small { width: 80px; height: 50px; }
+.tortoise .shell {
+  width: 100px;
+  height: 70px;
+  background: radial-gradient(circle, darkgreen, green);
+  border-radius: 50%;
+  position: absolute;
+  top: 5px;
+  left: 10px;
+}
+.tortoise.small .shell { width: 70px; height: 40px; }
+.tortoise .head {
+  width: 25px;
+  height: 25px;
+  background: green;
+  border-radius: 50%;
+  position: absolute;
+  top: 25px;
+  left: -15px;
+}
+.tortoise.small .head { width: 15px; height: 15px; top: 15px; left: -10px; }
+.tortoise .eye {
+  width: 6px;
+  height: 6px;
+  background: black;
+  border-radius: 50%;
+  position: absolute;
+  top: 8px;
+  left: 5px;
+}
+.tortoise .leg {
+  width: 20px;
+  height: 20px;
+  background: green;
+  border-radius: 50%;
+  position: absolute;
+  animation: paddle 1s infinite alternate ease-in-out;
+}
+.tortoise.small .leg { width: 12px; height: 12px; }
+.tortoise .leg.front-left { top: 10px; left: 0; }
+.tortoise .leg.front-right { top: 10px; right: 0; }
+.tortoise .leg.back-left { bottom: 10px; left: 0; }
+.tortoise .leg.back-right { bottom: 10px; right: 0; }
+
+@keyframes paddle { 0% { transform: rotate(0deg); } 100% { transform: rotate(20deg); } }
