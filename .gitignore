@@ -10,3 +10,7 @@ Thumbs.db
 
 # Ignore node modules if you add JS tooling later
 node_modules/
+
+# Ignore build artifacts
+dist/
+build/
