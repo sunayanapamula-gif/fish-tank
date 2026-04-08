@@ -15,6 +15,14 @@ const sharkContainer = document.getElementById('sharkContainer');
 const waterSound = document.getElementById("waterSound");
 waterSound.volume = 0.4; // softer background volume
 
+// Play/Pause buttons
+document.getElementById("playBtn").addEventListener("click", () => {
+  waterSound.play();
+});
+document.getElementById("pauseBtn").addEventListener("click", () => {
+  waterSound.pause();
+});
+
 // Plants with bubbles
 for (let i = 0; i < 12; i++) {
   const plant = document.createElement('div');
@@ -204,7 +212,7 @@ const waterTank = document.getElementById("waterTank");
 let isNight = true; // default night mode
 
 toggleBtn.addEventListener("click", () => {
-    if (isNight) {
+  if (isNight) {
     // Switch to Day Mode
     waterTank.style.background = "linear-gradient(to bottom, #0099ff, #003366)";
     document.querySelectorAll(".fish .body").forEach(f => f.style.boxShadow = "none");
