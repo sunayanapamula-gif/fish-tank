@@ -4,8 +4,10 @@ body, html {
   height: 100%;
   width: 100%;
   overflow: hidden;
+  font-family: Arial, sans-serif;
 }
 
+/* Water Tank */
 #waterTank {
   position: fixed;
   top: 0; left: 0;
@@ -19,6 +21,27 @@ body, html {
 @keyframes waveMotion {
   0% { background-position: 0 0; }
   100% { background-position: 100vw 0; }
+}
+
+/* Control Buttons */
+.controls {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 1000;
+}
+.controls button {
+  margin: 5px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  background: #0066cc;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.controls button:hover {
+  background: #004c99;
 }
 
 /* Fish */
@@ -202,4 +225,60 @@ body, html {
   0% { transform: translateY(0); }
   50% { transform: translateY(-50px); }
   100% { transform: translateY(0); }
+}
+
+/* Starfish */
+.starfish {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background: orange;
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  box-shadow: 0 0 10px rgba(255,165,0,0.8);
+}
+
+/* Crab */
+.crab {
+  position: absolute;
+  width: 60px;
+  height: 30px;
+  background: red;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(255,0,0,0.7);
+}
+
+/* Neon Fish */
+.neon-fish {
+  position: absolute;
+  width: 80px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(90deg, cyan, magenta, lime);
+  box-shadow: 0 0 20px rgba(0,255,255,0.9), 0 0 40px rgba(255,0,255,0.7);
+  animation: swimNeon 6s infinite ease-in-out;
+}
+@keyframes swimNeon {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(200px) translateY(-30px); }
+  100% { transform: translateX(0); }
+}
+
+/* Cursor Escape Effect (visual feedback) */
+.fish.escape {
+  transition: transform 0.5s ease;
+  filter: drop-shadow(0 0 15px yellow);
+}
+
+/* Positioning for new creatures */
+#starfishContainer .starfish {
+  bottom: 10%;
+  left: 20%;
+}
+#crabContainer .crab {
+  bottom: 5%;
+  right: 15%;
+}
+#neonFishContainer .neon-fish {
+  top: 30%;
+  left: 50%;
 }
