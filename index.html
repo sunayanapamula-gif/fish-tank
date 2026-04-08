@@ -10,9 +10,9 @@
   <div class="controls">
     <button id="resetBtn">Reset</button>
     <button id="schoolBtn">Schooling Mode</button>
-    <button onclick="document.getElementById('waterSound').play()">Play Water Sound</button>
-    <button onclick="document.getElementById('waterSound').pause()">Pause Water Sound</button>
-    <button id="toggleThemeBtn">Toggle Day/Night</button> <!-- NEW button -->
+    <button id="playBtn">Play Water Sound</button>
+    <button id="pauseBtn">Pause Water Sound</button>
+    <button id="toggleThemeBtn">Toggle Day/Night</button>
   </div>
 
   <!-- Aquarium Container -->
@@ -32,7 +32,7 @@
 
   <!-- Continuous Water Sound -->
   <audio id="waterSound" autoplay loop>
-    <source src="549334__kapilkant__soft-ocean-waves-sounds.m4a" type="audio/mp4">
+    <source src="549334__kapilkant__soft-ocean-waves-sounds.m4a" type="audio/m4a">
     <!-- Fallback text for unsupported browsers -->
     Your browser does not support the audio element.
   </audio>
@@ -53,12 +53,14 @@
         waterTank.style.background = "linear-gradient(to bottom, #0099ff, #003366)";
         document.querySelectorAll(".fish .body").forEach(f => f.style.boxShadow = "none");
         document.querySelectorAll(".plant").forEach(p => p.style.boxShadow = "none");
+        document.querySelectorAll(".jellyfish").forEach(j => j.style.boxShadow = "0 0 20px rgba(173,216,230,0.9)");
         isNight = false;
       } else {
         // Switch back to Night Mode
         waterTank.style.background = "linear-gradient(to bottom, #001a33, #000000)";
         document.querySelectorAll(".fish .body").forEach(f => f.style.boxShadow = "0 0 25px rgba(255,255,255,1)");
         document.querySelectorAll(".plant").forEach(p => p.style.boxShadow = "0 0 15px rgba(0,255,150,0.7)");
+        document.querySelectorAll(".jellyfish").forEach(j => j.style.boxShadow = "0 0 40px rgba(0,200,255,1), 0 0 80px rgba(0,200,255,0.7)");
         isNight = true;
       }
     });
