@@ -9,6 +9,7 @@ const jellyfishContainer = document.getElementById('jellyfishContainer');
 const starfishContainer = document.getElementById('starfishContainer');
 const crabContainer = document.getElementById('crabContainer');
 const neonFishContainer = document.getElementById('neonFishContainer');
+const sharkContainer = document.getElementById('sharkContainer');
 
 // Water sound control
 const waterSound = document.getElementById("waterSound");
@@ -83,7 +84,7 @@ function createFish(type, bigTail=false, small=false) {
     fish.style.transition = "top 8s ease, left 8s ease";
     fish.style.top = newTop;
     fish.style.left = newLeft;
-  }, 8000); // every 8 seconds
+  }, 8000);
 }
 
 // Fishes
@@ -113,6 +114,15 @@ function createTortoise(small=false) {
   tortoise.style.top = `${Math.random() * 70}vh`;
   tortoise.style.left = `${Math.random() * 90}vw`;
   tortoiseContainer.appendChild(tortoise);
+
+  // Continuous random swimming
+  setInterval(() => {
+    const newTop = `${Math.random() * 70}vh`;
+    const newLeft = `${Math.random() * 90}vw`;
+    tortoise.style.transition = "top 10s ease, left 10s ease";
+    tortoise.style.top = newTop;
+    tortoise.style.left = newLeft;
+  }, 10000);
 }
 createTortoise(false);
 createTortoise(true);
@@ -132,6 +142,29 @@ const starfish = document.createElement('div'); starfish.className = 'starfish';
 const crab = document.createElement('div'); crab.className = 'crab'; crabContainer.appendChild(crab);
 const neonFish = document.createElement('div'); neonFish.className = 'neon-fish'; neonFishContainer.appendChild(neonFish);
 
+// Shark
+function createShark() {
+  const shark = document.createElement('div');
+  shark.className = 'shark';
+  shark.style.top = `${Math.random() * 60}vh`;
+  shark.style.left = "-250px"; // start off-screen
+  sharkContainer.appendChild(shark);
+
+  // Swim across
+  setTimeout(() => {
+    shark.style.transition = "left 1s linear";
+    shark.style.left = "120vw";
+  }, 50);
+
+  // Remove after 1 second
+  setTimeout(() => {
+    shark.remove();
+  }, 1000);
+}
+
+// Appear every 2 minutes
+setInterval(createShark, 120000);
+
 // --- Buttons ---
 document.getElementById("resetBtn").addEventListener("click", () => {
   fishContainer.innerHTML = "";
@@ -140,6 +173,7 @@ document.getElementById("resetBtn").addEventListener("click", () => {
   starfishContainer.innerHTML = "";
   crabContainer.innerHTML = "";
   neonFishContainer.innerHTML = "";
+  sharkContainer.innerHTML = "";
   createFish('rainbow', true);
   createFish('orange');
   createFish('blue', true);
