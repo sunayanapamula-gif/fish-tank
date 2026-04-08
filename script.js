@@ -9,6 +9,15 @@ const starfishContainer = document.getElementById('starfishContainer');
 const crabContainer = document.getElementById('crabContainer');
 const neonFishContainer = document.getElementById('neonFishContainer');
 
+// --- Audio Setup ---
+const bgMusic = document.getElementById('bgMusic'); // background music element in index.html
+bgMusic.volume = 0.5; // softer volume
+
+function playEscapeSound() {
+  const sound = new Audio("bubble-pop.mp3"); // place bubble-pop.mp3 in your project folder
+  sound.play();
+}
+
 // Add plants with bubbles
 for (let i = 0; i < 12; i++) {
   const plant = document.createElement('div');
@@ -79,11 +88,12 @@ function createFish(type, bigTail=false, small=false) {
     fish.style.left = `${Math.random() * 90}vw`;
   }, 6000);
 
-  // Cursor escape behavior
+  // Cursor escape behavior + sound
   fish.addEventListener('mouseenter', () => {
     fish.classList.add('escape');
     fish.style.top = `${Math.random() * 70}vh`;
     fish.style.left = `${Math.random() * 90}vw`;
+    playEscapeSound();
     setTimeout(() => fish.classList.remove('escape'), 1000);
   });
 }
