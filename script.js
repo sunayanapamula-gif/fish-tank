@@ -5,6 +5,9 @@ const bubbleContainer = document.getElementById('bubbleContainer');
 const tortoiseContainer = document.getElementById('tortoiseContainer');
 const coralContainer = document.getElementById('coralContainer');
 const jellyfishContainer = document.getElementById('jellyfishContainer');
+const starfishContainer = document.getElementById('starfishContainer');
+const crabContainer = document.getElementById('crabContainer');
+const neonFishContainer = document.getElementById('neonFishContainer');
 
 // Add plants with bubbles
 for (let i = 0; i < 12; i++) {
@@ -76,15 +79,12 @@ function createFish(type, bigTail=false, small=false) {
     fish.style.left = `${Math.random() * 90}vw`;
   }, 6000);
 
+  // Cursor escape behavior
   fish.addEventListener('mouseenter', () => {
-    const hideOption = Math.random();
-    if (hideOption < 0.5) {
-      fish.style.top = "80vh";
-      fish.style.left = `${Math.random() * 90}vw`;
-    } else {
-      fish.style.top = "70vh";
-      fish.style.left = "42vw";
-    }
+    fish.classList.add('escape');
+    fish.style.top = `${Math.random() * 70}vh`;
+    fish.style.left = `${Math.random() * 90}vw`;
+    setTimeout(() => fish.classList.remove('escape'), 1000);
   });
 }
 
@@ -163,3 +163,59 @@ function createJellyfish() {
 for (let i = 0; i < 3; i++) {
   createJellyfish();
 }
+
+// Add starfish
+const starfish = document.createElement('div');
+starfish.className = 'starfish';
+starfishContainer.appendChild(starfish);
+
+// Add crab
+const crab = document.createElement('div');
+crab.className = 'crab';
+crabContainer.appendChild(crab);
+
+// Add neon fish
+const neonFish = document.createElement('div');
+neonFish.className = 'neon-fish';
+neonFishContainer.appendChild(neonFish);
+
+// --- Interactive Buttons ---
+document.getElementById("resetBtn").addEventListener("click", () => {
+  fishContainer.innerHTML = "";
+  tortoiseContainer.innerHTML = "";
+  jellyfishContainer.innerHTML = "";
+  starfishContainer.innerHTML = "";
+  crabContainer.innerHTML = "";
+  neonFishContainer.innerHTML = "";
+  // Recreate everything
+  createFish('rainbow', true);
+  createFish('orange');
+  createFish('blue', true);
+  createFish('rainbow');
+  createFish('orange', true);
+  createFish('blue', false, true);
+  createFish('orange', false, true);
+  createFish('rainbow', false, true);
+  createTortoise(false);
+  createTortoise(true);
+  for (let i = 0; i < 3; i++) createJellyfish();
+  starfishContainer.appendChild(starfish);
+  crabContainer.appendChild(crab);
+  neonFishContainer.appendChild(neonFish);
+});
+
+document.getElementById("orbitBtn").addEventListener("click", () => {
+  const fishes = document.querySelectorAll(".fish");
+  fishes.forEach((fish, i) => {
+    fish.style.transition = "transform 5s linear";
+    fish.style.transform = `rotate(${i * 45}deg) translate(150px)`;
+  });
+});
+
+document.getElementById("schoolBtn").addEventListener("click", () => {
+  const fishes = document.querySelectorAll(".fish");
+  fishes.forEach(fish => {
+    fish.style.top = "50vh";
+    fish.style.left = `${40 + Math.random() * 20}vw`;
+  });
+});
