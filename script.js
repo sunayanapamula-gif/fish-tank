@@ -172,7 +172,6 @@ function createShark() {
 
 // Appear every 2 minutes
 setInterval(createShark, 120000);
-
 // --- Buttons ---
 document.getElementById("resetBtn").addEventListener("click", () => {
   fishContainer.innerHTML = "";
@@ -181,7 +180,8 @@ document.getElementById("resetBtn").addEventListener("click", () => {
   starfishContainer.innerHTML = "";
   crabContainer.innerHTML = "";
   neonFishContainer.innerHTML = "";
-    createFish('rainbow', true);
+  sharkContainer.innerHTML = "";
+  createFish('rainbow', true);
   createFish('orange');
   createFish('blue', true);
   createFish('rainbow');
@@ -227,4 +227,3 @@ toggleBtn.addEventListener("click", () => {
     isNight = true;
   }
 });
- 
