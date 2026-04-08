@@ -197,3 +197,26 @@ document.getElementById("schoolBtn").addEventListener("click", () => {
     fish.style.left = `${40 + Math.random() * 20}vw`;
   });
 });
+
+// Day/Night Toggle
+const toggleBtn = document.getElementById("toggleThemeBtn");
+const waterTank = document.getElementById("waterTank");
+let isNight = true; // default night mode
+
+toggleBtn.addEventListener("click", () => {
+    if (isNight) {
+    // Switch to Day Mode
+    waterTank.style.background = "linear-gradient(to bottom, #0099ff, #003366)";
+    document.querySelectorAll(".fish .body").forEach(f => f.style.boxShadow = "none");
+    document.querySelectorAll(".plant").forEach(p => p.style.boxShadow = "none");
+    document.querySelectorAll(".jellyfish").forEach(j => j.style.boxShadow = "0 0 20px rgba(173,216,230,0.9)");
+    isNight = false;
+  } else {
+    // Switch back to Night Mode
+    waterTank.style.background = "linear-gradient(to bottom, #001a33, #000000)";
+    document.querySelectorAll(".fish .body").forEach(f => f.style.boxShadow = "0 0 25px rgba(255,255,255,1)");
+    document.querySelectorAll(".plant").forEach(p => p.style.boxShadow = "0 0 15px rgba(0,255,150,0.7)");
+    document.querySelectorAll(".jellyfish").forEach(j => j.style.boxShadow = "0 0 40px rgba(0,200,255,1), 0 0 80px rgba(0,200,255,0.7)");
+    isNight = true;
+  }
+});
