@@ -75,14 +75,15 @@ function createFish(type, bigTail=false, small=false) {
     fish.style.left = newLeft;
     setTimeout(() => fish.classList.remove('escape'), 1000);
   });
+
   // Continuous random swimming
   setInterval(() => {
     const newTop = `${Math.random() * 70}vh`;
     const newLeft = `${Math.random() * 90}vw`;
-    fish.style.transition = "top 5s ease, left 5s ease";
+    fish.style.transition = "top 8s ease, left 8s ease";
     fish.style.top = newTop;
     fish.style.left = newLeft;
-  }, 6000); // every 6 seconds
+  }, 8000); // every 8 seconds
 }
 
 // Fishes
