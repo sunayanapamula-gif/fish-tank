@@ -13,15 +13,7 @@ const sharkContainer = document.getElementById('sharkContainer');
 
 // Water sound control
 const waterSound = document.getElementById("waterSound");
-waterSound.volume = 0.4;
-
-// Play/Pause buttons
-document.getElementById("playBtn").addEventListener("click", () => {
-  waterSound.play();
-});
-document.getElementById("pauseBtn").addEventListener("click", () => {
-  waterSound.pause();
-});
+waterSound.volume = 0.4; // softer background volume
 
 // Plants with bubbles
 for (let i = 0; i < 12; i++) {
@@ -74,6 +66,7 @@ function createFish(type, bigTail=false, small=false) {
   fish.style.left = `${Math.random() * 90}vw`;
   fishContainer.appendChild(fish);
 
+  // Cursor escape with visible motion
   fish.addEventListener('mouseenter', () => {
     fish.classList.add('escape');
     const newTop = `${Math.random() * 70}vh`;
@@ -84,6 +77,7 @@ function createFish(type, bigTail=false, small=false) {
     setTimeout(() => fish.classList.remove('escape'), 1000);
   });
 
+  // Continuous random swimming
   setInterval(() => {
     const newTop = `${Math.random() * 70}vh`;
     const newLeft = `${Math.random() * 90}vw`;
@@ -121,6 +115,7 @@ function createTortoise(small=false) {
   tortoise.style.left = `${Math.random() * 90}vw`;
   tortoiseContainer.appendChild(tortoise);
 
+  // Continuous random swimming
   setInterval(() => {
     const newTop = `${Math.random() * 70}vh`;
     const newLeft = `${Math.random() * 90}vw`;
@@ -155,16 +150,16 @@ function createShark() {
   shark.style.left = "-250px"; // start off-screen
   sharkContainer.appendChild(shark);
 
-  // Swim across slowly
+  // Swim across
   setTimeout(() => {
-    shark.style.transition = "left 20s linear";
+    shark.style.transition = "left 1s linear";
     shark.style.left = "120vw";
   }, 50);
 
-  // Remove after 22 seconds
+  // Remove after 1 second
   setTimeout(() => {
     shark.remove();
-  }, 22000);
+  }, 1000);
 }
 
 // Appear every 2 minutes
@@ -179,8 +174,6 @@ document.getElementById("resetBtn").addEventListener("click", () => {
   crabContainer.innerHTML = "";
   neonFishContainer.innerHTML = "";
   sharkContainer.innerHTML = "";
-
-  // Recreate creatures
   createFish('rainbow', true);
   createFish('orange');
   createFish('blue', true);
@@ -211,7 +204,7 @@ const waterTank = document.getElementById("waterTank");
 let isNight = true; // default night mode
 
 toggleBtn.addEventListener("click", () => {
-  if (isNight) {
+    if (isNight) {
     // Switch to Day Mode
     waterTank.style.background = "linear-gradient(to bottom, #0099ff, #003366)";
     document.querySelectorAll(".fish .body").forEach(f => f.style.boxShadow = "none");
