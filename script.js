@@ -158,16 +158,16 @@ function createShark() {
   shark.style.left = "-250px"; // start off-screen
   sharkContainer.appendChild(shark);
 
-  // Swim across
+  // Swim across slowly
   setTimeout(() => {
-    shark.style.transition = "left 1s linear";
+    shark.style.transition = "left 20s linear";
     shark.style.left = "120vw";
   }, 50);
 
-  // Remove after 1 second
+  // Remove after 22 seconds
   setTimeout(() => {
     shark.remove();
-  }, 1000);
+  }, 22000);
 }
 
 // Appear every 2 minutes
@@ -181,8 +181,7 @@ document.getElementById("resetBtn").addEventListener("click", () => {
   starfishContainer.innerHTML = "";
   crabContainer.innerHTML = "";
   neonFishContainer.innerHTML = "";
-  sharkContainer.innerHTML = "";
-  createFish('rainbow', true);
+    createFish('rainbow', true);
   createFish('orange');
   createFish('blue', true);
   createFish('rainbow');
@@ -228,3 +227,4 @@ toggleBtn.addEventListener("click", () => {
     isNight = true;
   }
 });
+ 
