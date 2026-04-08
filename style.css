@@ -329,3 +329,19 @@ body, html {
   0% { transform: rotate(0deg) translateY(0); }
   100% { transform: rotate(10deg) translateY(-5px); }
 }
+/* Smooth transitions */
+#waterTank {
+  transition: background 2s ease; /* fade background */
+}
+
+.fish .body {
+  transition: box-shadow 2s ease; /* glow fade */
+}
+
+.plant {
+  transition: box-shadow 2s ease; /* glow fade */
+}
+
+.jellyfish {
+  transition: box-shadow 2s ease; /* glow fade */
+}
