@@ -13,7 +13,7 @@ const sharkContainer = document.getElementById('sharkContainer');
 
 // Water sound control
 const waterSound = document.getElementById("waterSound");
-waterSound.volume = 0.4; // softer background volume
+waterSound.volume = 0.4;
 
 // Play/Pause buttons
 document.getElementById("playBtn").addEventListener("click", () => {
@@ -74,7 +74,6 @@ function createFish(type, bigTail=false, small=false) {
   fish.style.left = `${Math.random() * 90}vw`;
   fishContainer.appendChild(fish);
 
-  // Cursor escape with visible motion
   fish.addEventListener('mouseenter', () => {
     fish.classList.add('escape');
     const newTop = `${Math.random() * 70}vh`;
@@ -85,7 +84,6 @@ function createFish(type, bigTail=false, small=false) {
     setTimeout(() => fish.classList.remove('escape'), 1000);
   });
 
-  // Continuous random swimming
   setInterval(() => {
     const newTop = `${Math.random() * 70}vh`;
     const newLeft = `${Math.random() * 90}vw`;
@@ -123,7 +121,6 @@ function createTortoise(small=false) {
   tortoise.style.left = `${Math.random() * 90}vw`;
   tortoiseContainer.appendChild(tortoise);
 
-  // Continuous random swimming
   setInterval(() => {
     const newTop = `${Math.random() * 70}vh`;
     const newLeft = `${Math.random() * 90}vw`;
@@ -182,6 +179,8 @@ document.getElementById("resetBtn").addEventListener("click", () => {
   crabContainer.innerHTML = "";
   neonFishContainer.innerHTML = "";
   sharkContainer.innerHTML = "";
+
+  // Recreate creatures
   createFish('rainbow', true);
   createFish('orange');
   createFish('blue', true);
