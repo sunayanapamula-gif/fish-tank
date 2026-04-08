@@ -1,0 +1,12 @@
+# Ignore secrets and keys
+*.txt
+*.key
+*.pem
+*.env
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore node modules if you add JS tooling later
+node_modules/
